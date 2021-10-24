@@ -2,4 +2,4 @@
   <h1>iStructure</h1>
 </div>
 
-An Open Source automated structural design framework.
+An Open Source automatic structural design framework.
