@@ -13,28 +13,8 @@
 # limitations under the License.
 
 import pandas as pd
-
-class StructuralMember:
-    #Abstract class with the general attributes and methods of all the
-    #structural members
-    def __init__(self, sections, long):
-        self.sections = sections    #All possible sections considered by the user
-        self.long = long
-        self.section = None         #Selected cross section 
-    
-    def combinedLoad(self):
-        loads = pd.DataFrame().append({"dead":0, "live":0, "product":0}, ignore_index=True)
-    
-    class Selection:
-        #General selection procedure of the cross section of the structural member.
-        def axialStress(self):
-            pass
-
-        def momentumStress(self):
-            pass    
-
-        def elasticBuckling(self):
-            pass
+import numpy as np
+from iStructure.StructuralDesign.StructuralMember import StructuralMember
 
 class Beam(StructuralMember):
     pass
