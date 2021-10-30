@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import pandas as pd
+import numpy as np
 
 class Module:
     #A mezzanine floor racking system consist of a series of modules. Each module is made of four columns, four beams
@@ -27,7 +28,7 @@ class Module:
 class Floor:
     #Made by a series of modules. A mezzanine floor racking system can be made by multiple floors. 
     #It has at least one floor.
-    def __init__(self, modules=None, **kwargs):
+    def __init__(self, modules=[], **kwargs):
         #Set the general dimensions of the mezzanine floor (genetic algorithm can be used in a next version to minimize cost of the structure)
         if "length" in kwargs and "width" in kwargs and "height" in kwargs:
             self.dims = pd.DataFrame().append({
@@ -42,23 +43,73 @@ class Floor:
                 "height":0
             }, ignore_index=True)
         
-        self.modules = []
-
-        for module in modules:
-            self.addModule(**module)
+            self.modules = []
+            for module in modules:
+                self.addModule(**module)
             
     def addModule(self, length, width, height, joist_sep, pos):
         #Check if the module to append is valid. A module is valid if the position (pos)
-        #is unique and if width and length do not collide with other modules
-        valid = True
-        #for module in self.modules:
-        
+        #is unique and if width and length do not collide with other modules. Modules
+        #collition can be produced in the horiontal or vertical direction. A difference
+        #in height can, also, be considered a collition between floors. 
+
+        #Modules can be registered in disorder.
+        if len(self.modules) > 0:
+            valid = height == self.modules[-1].height #A difference in height can not be tolerated
+        else:
+            #This is the first module to be registered
+            valid = True
+            self.dims['height'] = height
+
+        if valid:
+            #Registered module => coords
+            coords = np.zeros((4,2))    #(x,y)
+            #Module to be registered => mod_coords
+            mod_coords = np.array([
+                pos,                                #pos = (x,y)
+                [pos[0] + width, pos[1]],
+                [pos[0] + width, pos[1] + height],
+                [pos[0], pos[1] + height]
+            ])
+            for module in self.modules:
+                for i in range(4):
+                    coords[i] = module.pos
+                coords[1][0] += module.width
+                coords[2][0] = coords[1][0]
+                coords[2][1] +=  module.height
+                coords[3][1] += module.height
+
+                #Now, lets check if the new module is valid...
+                #There are two ways for a collition to exist:
+                #1. Module superposition
+                c1 = mod_coords[0] <= coords[0]
+                c2 = mod_coords[2] >= coords[1]
+                if c1.all() and c2.all():
+                    valid = False
+                    break
+                #2. A vertex is inside the registered module
+                for i in range(4):
+                    c1 = mod_coords[i] > coords[0]
+                    c2 = mod_coords[i] < coords[2]
+                    #import pdb; pdb.set_trace()
+                    if c1.all() and c2.all():
+                        #The vertex is inside the module's domain
+                        valid = False
+                        break
+                
         if valid:
             self.modules.append(Module(length, width, height, joist_sep, pos))
+            #Update dimensions of the floor
+            if self.dims['width'][0] < pos[0] + width:
+                self.dims['width'] = pos[0] + width
+            if self.dims['length'][0] < pos[1] + length:
+                self.dims['length'] = pos[1] + length
+
         else:
-            raise ValueError("Module, in position {pos} and dimensions {dims}, is not valid because it overlaps with other modules.".format(pos=pos, dims=[length, width]))
+            raise ValueError("Module, in position {pos} and dimensions {dims}, is not valid because it overlaps with other modules.".format(pos=pos, dims=np.array([length, width])))
 
     def removeModule(self, pos):
+        #'pos' referes to the modules original position
         for module in self.modules:
             if pos == module.pos:
                 self.modules.remove(module)
