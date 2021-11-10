@@ -16,11 +16,68 @@ import pandas as pd
 import numpy as np
 from iStructure.StructuralDesign.StructuralMember import StructuralMember
 
-class Beam(StructuralMember):
-    pass
-
 class Joist(StructuralMember):
-    pass
+    def __init__(self, designDims, section = None, sections = None, pos=np.zeros(2)):
+        super().__init__(designDims['width'][0], section, sections, pos)
+    
+    class Selection(StructuralMember.Selection):
+        def __init__(self, parent):
+            #'parent' refers to the base structural member class
+            super().__init__(parent)
+
+        def combinedLoad(self):
+            super().combinedLoad()
+
+        def axialStress(self):
+            super().axialStress()
+        
+        def momentumStress(self):
+            StructuralMember.Selection.momentumStress(self) 
+            print("Ohh")
+
+        def elasticBuckling(self):
+            pass
+
+class Beam(StructuralMember):
+    def __init__(self, designDims, section = None, sections = None, pos=np.zeros(2)):
+        super().__init__(designDims['length'][0], section, sections, pos)
+    
+    class Selection(StructuralMember.Selection):
+        def __init__(self, parent):
+            #'parent' refers to the base structural member class
+            StructuralMember.Selection.__init__(self, parent)
+
+        def combinedLoad(self):
+            StructuralMember.Selection.combinedLoad(self)
+
+        def axialStress(self):
+            StructuralMember.Selection.axialStress(self)
+        
+        def momentumStress(self):
+            StructuralMember.Selection.momentumStress(self) 
+            print("Ohh")
+
+        def elasticBuckling(self):
+            pass
 
 class Column(StructuralMember):
-    pass
+    def __init__(self, designDims, section = None, sections = None, pos=np.zeros(2)):
+        super().__init__(designDims['height'][0], section, sections, pos)
+    
+    class Selection(StructuralMember.Selection):
+        def __init__(self, parent):
+            #'parent' refers to the base structural member class
+            StructuralMember.Selection.__init__(self, parent)
+
+        def combinedLoad(self):
+            StructuralMember.Selection.combinedLoad(self)
+
+        def axialStress(self):
+            StructuralMember.Selection.axialStress(self)
+        
+        def momentumStress(self):
+            StructuralMember.Selection.momentumStress(self) 
+            print("Ohh")
+
+        def elasticBuckling(self):
+            pass
