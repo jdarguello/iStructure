@@ -84,9 +84,7 @@ class Floor:
             ])
             for module in self.modules:
                 for i in range(4):
-                    #Initiate registered module dimensions to its original position, equivalent to:
-                    #width = 0, length = 0
-                    coords[i] = module.pos      
+                    coords[i] = module.pos
                 coords[1][0] += module.width
                 coords[2][0] = coords[1][0]
                 coords[2][1] +=  module.height
@@ -109,18 +107,6 @@ class Floor:
                         #The vertex is inside the module's domain
                         valid = False
                         break
-                #3. Equally side inside of a module, which can happen in two ways: 
-                #vertical or horizontal side inside of another module
-
-                #3.1. Horizontal analysis
-                c1 = mod_coords[0][1] == coords[0][1] and mod_coords[0][0] < coords[1][0]
-                #3.2. Vertical analysis
-                c2 = mod_coords[0][0] == coords[0][0] and mod_coords[0][1] < coords[2][1]
-
-                if c1 or c2:
-                    valid = False
-                    break
-
                 
         if valid:
             self.modules.append(Module(length, width, height, joist_sep, pos))
