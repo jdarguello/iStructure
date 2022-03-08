@@ -1,0 +1,80 @@
+\begin{thebibliography}{10}
+
+\bibitem{S100}
+{North American Specification for the Design of Cold-Formed Steel Structural
+  Members}.
+\newblock Standard, Approved American National Standard, 2016.
+
+\bibitem{AKINOSHO2020101827}
+Taofeek~D. Akinosho, Lukumon~O. Oyedele, Muhammad Bilal, Anuoluwapo~O. Ajayi,
+  Manuel~Davila Delgado, Olugbenga~O. Akinade, and Ashraf~A. Ahmed.
+\newblock Deep learning in the construction industry: A review of present
+  status and future innovations.
+\newblock {\em Journal of Building Engineering}, 32:101827, 2020.
+
+\bibitem{MH16.1}
+{Specification for the Design, Testing and Utilization of Industrial Steel
+  Storage Racks}.
+\newblock Standard, Approved American National Standard, 2012.
+
+\bibitem{ASCE}
+{Minimum Design Loads and Associated Criteria for Buildings and Other
+  Structures}.
+\newblock Standard, American Society of Civil Engineers, 2017.
+
+\bibitem{BOCK2015113}
+Thomas Bock.
+\newblock The future of construction automation: Technological disruption and
+  the upcoming ubiquity of robotics.
+\newblock {\em Automation in Construction}, 59:113--121, 2015.
+
+\bibitem{CAI2019100989}
+Shiyao Cai, Zhiliang Ma, Miroslaw~J. Skibniewski, and Song Bao.
+\newblock Construction automation and robotics for high-rise buildings over the
+  past decades: A comprehensive review.
+\newblock {\em Advanced Engineering Informatics}, 42:100989, 2019.
+
+\bibitem{CHEN201822}
+Qian Chen, Borja {García de Soto}, and Bryan~T. Adey.
+\newblock Construction automation: Research areas, industry concerns and
+  suggestions for advancement.
+\newblock {\em Automation in Construction}, 94:22--38, 2018.
+
+\bibitem{10.22260/ISARC2000/0031}
+Noriyuki Furuya, Takashi Shiokawa, Koji Hamada, Kohei Kurita, Isamu Kunimoto,
+  and Hiroshi Miyakawa.
+\newblock Present circumstances of an automated construction system for
+  high-rise reinforced concrete buildings.
+\newblock In Ming-Teh Wang, editor, {\em Proceedings of the 17th
+  IAARC/CIB/IEEE/IFAC/IFR International Symposium on Automation and Robotics in
+  Construction}, pages 1--8, Taipei, Taiwan, September 2000. International
+  Association for Automation and Robotics in Construction (IAARC).
+
+\bibitem{hm2013construction}
+HM~Government.
+\newblock Construction 2025: industrial strategy: government and industry in
+  partnership, 2013.
+
+\bibitem{LEE2021103680}
+Bokyeong Lee, Hyeonggil Choi, Byongwang Min, Jungrim Ryu, and Dong-Eun Lee.
+\newblock Development of formwork automation design software for improving
+  construction productivity.
+\newblock {\em Automation in Construction}, 126:103680, 2021.
+
+\bibitem{unknown}
+Neil Thompson, Will Squires, Nick Fearnhead, and Rob Claase.
+\newblock Digitalisation in construction - industrial strategy review,
+  supporting the government's industrial strategy, 07 2017.
+
+\bibitem{sectionproperties}
+Robbie van Leeuwen.
+\newblock sectionproperties.
+\newblock {https://github.com/robbievanleeuwen/section-properties}, 2019-today.
+
+\bibitem{YIN201972}
+Xianfei Yin, Hexu Liu, Yuan Chen, and Mohamed Al-Hussein.
+\newblock Building information modelling for off-site construction: Review and
+  future directions.
+\newblock {\em Automation in Construction}, 101:72--91, 2019.
+
+\end{thebibliography}

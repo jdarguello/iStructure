@@ -1,0 +1,40 @@
+% Define block styles: decision, block, line, cloud, blockTwo
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+       text width=7em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+       text width=7em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{blockConc} = [rectangle, draw, fill=orange!20, 
+       text width=7em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{empty} = [rectangle, draw, white, fill=white, 
+       text width=-4em, text centered, rounded corners, minimum height=-4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+       minimum height=2em]
+\tikzstyle{blockTwo} = [rectangle, draw, fill=blue!20, 
+       text width=3em, text centered, rounded corners, minimum height=4em]
+
+\begin{figure}[h!]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[scale=1, node distance = 1cm]
+       % Place nodes
+       \node [block] (init) {Material selection};
+       \node [block, below of=init, node distance=3cm] (reco) {Cross section database definition};
+       \node [block, below of=reco, node distance=3cm] (velsed) {Definition of the area of the structure and load conditions};
+       \node [block, below of=velsed, node distance=3cm] (geo) {Structural design procedure};
+	   \node [blockConc, below of=geo, node distance=4cm] (conc) {Engineering report, cost analysis and CAD drawings };     
+       
+       %\draw (-1.58,-16) -- (-2.5,-16) -- (-2.5, -3) -- (-1.58,-3);
+       
+       %\node [left of=decide, node distance = 2.5cm] (intermedio)
+       % Draw edges
+       \path [line] (init) -- (reco);
+       \path [line] (reco) -- (velsed);
+       \path [line] (velsed) -- (geo);
+       \path [line] (geo) -- (conc);
+       %\path [line] (res.west) -- (decide.west);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Working methodology.}
+\label{methodology}
+\end{figure}

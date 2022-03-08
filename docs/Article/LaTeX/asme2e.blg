@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: asme2e.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 5 items.
+Database file #1: refs.bib
+I was expecting a `,' or a `}'---line 14 of file refs.bib
+ : 
+ : @article{LEE2021103680,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "unknown" isn't style-file defined
+--line 58 of file refs.bib
+Warning--empty author in S100
+Warning--empty author in MH16.1
+Warning--empty author in ASCE
+You've used 13 entries,
+            2118 wiz_defined-function locations,
+            582 strings with 6609 characters,
+and the built_in function-call counts, 3922 in all, are:
+= -- 365
+> -- 214
+< -- 1
++ -- 87
+- -- 73
+* -- 283
+:= -- 675
+add.period$ -- 35
+call.type$ -- 13
+change.case$ -- 81
+chr.to.int$ -- 0
+cite$ -- 16
+duplicate$ -- 130
+empty$ -- 298
+format.name$ -- 73
+if$ -- 805
+int.to.chr$ -- 0
+int.to.str$ -- 13
+missing$ -- 7
+newline$ -- 63
+num.names$ -- 22
+pop$ -- 79
+preamble$ -- 1
+purify$ -- 65
+quote$ -- 0
+skip$ -- 91
+stack$ -- 0
+substring$ -- 183
+swap$ -- 15
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 52
+warning$ -- 3
+while$ -- 29
+width$ -- 15
+write$ -- 134
+(There was 1 error message)

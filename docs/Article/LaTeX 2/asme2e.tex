@@ -1,0 +1,152 @@
+%%% use twocolumn and 10pt options with the asme2e format
+\documentclass[twocolumn,10pt]{asme2e}
+
+
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{etex}
+\reserveinserts{28}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[pdftex]{graphicx}
+
+\DeclareGraphicsRule{.1}{mps}{*}{} 
+\DeclareGraphicsRule{.2}{mps}{*}{}
+\usepackage{lmodern}
+%\usepackage{float}
+%\usepackage{hyperref}
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+% For dummy lipsum text
+\usepackage{lipsum}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{ragged2e}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\bibliographystyle{IEEEtran}
+%\usepackage[backend=biber]{biblatex}
+%\usepackage{adjustbox}
+\usepackage{gensymb}
+\usepackage{pgfgantt}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{pythontex}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows, positioning,decorations.pathreplacing,shapes, arrows.meta}
+\usetikzlibrary{decorations.pathmorphing,intersections}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.5.1}
+\pgfplotsset{width=7cm,compat=1.8}
+\usepackage{floatrow}
+\usepackage{hyperref}
+
+\usepackage{listings}
+
+\usepackage{xcolor}
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+\usepackage[edges]{forest}
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+\newlength\Size
+\setlength\Size{4pt}
+\tikzset{%
+  folder/.pic={%
+    \filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);
+    \filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+  },
+  file/.pic={%
+    \filldraw [draw=folderborder, top color=folderbg!5, bottom color=folderbg!10] (-\Size,.4*\Size+5pt) coordinate (a) |- (\Size,-1.2*\Size) coordinate (b) -- ++(0,1.6*\Size) coordinate (c) -- ++(-5pt,5pt) coordinate (d) -- cycle (d) |- (c) ;
+  },
+}
+\forestset{%
+  declare autowrapped toks={pic me}{},
+  pic dir tree/.style={%
+    for tree={%
+      folder,
+      font=\ttfamily,
+      grow'=0,
+    },
+    before typesetting nodes={%
+      for tree={%
+        edge label+/.option={pic me},
+      },
+    },
+  },
+  pic me set/.code n args=2{%
+    \forestset{%
+      #1/.style={%
+        inner xsep=2\Size,
+        pic me={pic {#2}},
+      }
+    }
+  },
+  pic me set={directory}{folder},
+  pic me set={file}{file},
+}
+
+\special{papersize=8.5in,11in}
+\confshortname{MSEC2022}
+\conffullname{the ASME 2022\\
+              International Manufacturing Science and Engineering Conference}
+
+\confdate{June 27 - July 1}
+\confyear{2022}
+\confcity{IN}
+\confcountry{USA}
+
+\papernum{MSEC2022-85981}
+
+
+\title{iStructure: An Open Source structural design framework}
+
+%%% first author
+\author{Juan David Arg\"uello Plata, Octavio Andr\'es Gonz\'alez Estrada
+    \affiliation{
+	Universidad Industrial de Santander
+    }	
+}
+
+\begin{document}
+
+\maketitle    
+
+\input{abstract}
+\input{intro}
+\input{framework}
+\input{mezzanine}
+%\input{methodology}
+\input{sections}
+\input{area}
+\input{members}
+\input{agradece}
+
+\end{document}

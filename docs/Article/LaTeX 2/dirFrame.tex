@@ -1,0 +1,45 @@
+\begin{figure}[h!]
+\centering
+\begin{forest}
+  pic dir tree,
+  where level=0{}{% folder icons by default; override using file for file icons
+    directory,
+  },
+  [iStructure
+    [Architect
+      [{CADrawings }
+        [Mezzanine.py, file
+        ]
+      ]
+      [Schemes
+        [Areas.py, file
+        ]
+        [CrossSection.py, file
+        ]
+      ]
+    ]
+    [CrossSection
+      [GenericMaterials.py, file
+      ]
+      [MechProp.py, file
+      ]
+    ]
+    [Reports
+      [Mezzanine.py, file
+      ]
+    ]
+    [StructuralDesign
+      [{Mezzanine}
+      	[Members.py, file
+      	]
+      	[Results.py, file
+      	]
+      ]
+      [StructuralMember.py, file
+      ]
+    ]
+  ]
+\end{forest}
+\caption{iStructure modules.}
+\label{modules}
+\end{figure}
