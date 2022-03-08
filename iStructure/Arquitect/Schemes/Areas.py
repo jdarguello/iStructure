@@ -14,11 +14,6 @@
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import gridspec
-from math import floor as min_round
-from math import ceil
-
 
 class Module:
     #A mezzanine floor racking system consist of a series of modules. Each module is made of four columns, four beams
@@ -29,12 +24,6 @@ class Module:
         self.height = height
         self.joist_sep = joist_sep
         self.pos = pos              #Vector of two elements: [x,y] (width, length)
-
-        #Joist separation must be equally distributed among the module, 
-        #if it is not, then it has to be recalculated
-        if self.length % self.joist_sep != 0:
-            num_joists = min_round(self.length/self.joist_sep)
-            self.joist_sep = self.length/num_joists
 
 class Floor:
     #Made by a series of modules. A mezzanine floor racking system can be made by multiple floors. 
@@ -84,9 +73,7 @@ class Floor:
             ])
             for module in self.modules:
                 for i in range(4):
-                    #Initiate registered module dimensions to its original position, equivalent to:
-                    #width = 0, length = 0
-                    coords[i] = module.pos      
+                    coords[i] = module.pos
                 coords[1][0] += module.width
                 coords[2][0] = coords[1][0]
                 coords[2][1] +=  module.height
@@ -109,18 +96,6 @@ class Floor:
                         #The vertex is inside the module's domain
                         valid = False
                         break
-                #3. Equally side inside of a module, which can happen in two ways: 
-                #vertical or horizontal side inside of another module
-
-                #3.1. Horizontal analysis
-                c1 = mod_coords[0][1] == coords[0][1] and mod_coords[0][0] < coords[1][0]
-                #3.2. Vertical analysis
-                c2 = mod_coords[0][0] == coords[0][0] and mod_coords[0][1] < coords[2][1]
-
-                if c1 or c2:
-                    valid = False
-                    break
-
                 
         if valid:
             self.modules.append(Module(length, width, height, joist_sep, pos))
@@ -154,46 +129,13 @@ class Mezzanine:
     @property
     def dims(self):
         #Get the biggest dimensions of modules to the structural design analysis
-        dims = pd.DataFrame().append({"length":0, "width":0, "height":0, "joist_sep":0}, ignore_index=True)
+        dims = pd.DataFrame().append({"length":0, "width":0, "height":0}, ignore_index=True)
         for floor in self.floors:
             for module in floor.modules:
-                if module.length > dims["length"][0]:
+                if module.length > dims["length"]:
                     dims["length"] = module.length
-                if module.width > dims["width"][0]:
+                if module.width > dims["width"]:
                     dims["width"] = module.width
-                if module.height > dims["height"][0]:
+                if module.height > dims["height"]:
                     dims["height"] = module.height
-                if module.joist_sep > dims["joist_sep"][0]:
-                    dims["joist_sep"] = module.joist_sep  
         return dims
-    
-    def scheme(self, plot=True): 
-        #Objective: return the figure object which allow the user to draw the general scheme of the structure
-        
-        fig = plt.figure() 
-        gs = gridspec.GridSpec(ceil(len(self.floors)/2), 2) #Clasify the flooor schemes in two columns
-        num = 1
-        for floor in self.floors:
-            ax = fig.add_subplot(gs[num-1])
-            ax.set_title("Floor #" + str(num))
-            for module in floor.modules:
-                x, y = module.pos[0], module.pos[1]
-                #Beams
-                color = "blue"
-                ax.plot([x,x], [y,y+module.length], 1, color=color)
-                ax.plot([x+module.width,x+module.width], [y,y+module.length], 1, color=color)
-                #Joists
-                color = "orange"
-                for i in range(min_round(module.length/module.joist_sep)+1):
-                    ax.plot(
-                            [x,x+module.width],
-                            [y+i*module.joist_sep,y+i*module.joist_sep],
-                            1,
-                            color=color
-                        )
-            num += 1
-        if plot:
-            plt.show()
-        else:
-            plt.close()
-        return fig

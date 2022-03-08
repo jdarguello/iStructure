@@ -22,20 +22,14 @@ class UnitSystems:
 
 class CrossSection(Section):
     #Specify general information of the cross section; including material and geometry.
-    def __init__(self, geometry, mesh, name = "", materials=None, time_info=False, units="SI"):
+    def __init__(self, geometry, mesh, materials=None, time_info=False, Units="SI"):
         super(CrossSection, self).__init__(geometry, mesh, materials, time_info)
-        self.name = name
+        self.calculate_geometric_properties()
+        self.calculate_warping_properties()
+        self.calculate_plastic_properties()
     
     def get_geometry(self):
         return self.geometry
-    
-    def calculate_properties(self):
-        self.calculate_geometric_properties()
-        #self.calculate_warping_properties()
-        #self.calculate_plastic_properties()
-    
-    def read_properties (self, fileFormat="json"):
-        pass
 
     def __call__(self):
-        return self.section_props.__dict__
+        return pd.DataFrame().append(self.section_props.__dict__, ignore_index=True)

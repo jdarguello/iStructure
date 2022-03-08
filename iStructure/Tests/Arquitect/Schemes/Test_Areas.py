@@ -1,19 +1,5 @@
-# Copyright 2021 The iStructure Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 from iStructure.Arquitect.Schemes.Areas import *
-from matplotlib import lines
+#from unittest import TestCase
 import pytest
 
 class Test_Area:
@@ -149,24 +135,6 @@ class Test_Area:
                     "joist_sep":0.5,
                     "pos": [0,0]
                 }
-            ],
-            #Equally side inside of a module
-            [
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [0,0]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [2,0]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [6,0]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [0,3]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [3,3]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [6,3]}
-            ],
-            
-            [
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [0,0]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [3,2]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [6,0]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [0,3]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [3,3]},
-                {"length":3, "width":3, "height":2.5, "joist_sep":0.5, "pos": [6,3]}
             ]
         ]
 
@@ -185,7 +153,7 @@ class Test_Area:
                     "width": 3, 
                     "height": 3,
                     "joist_sep":0.5,
-                    "pos": [0,3]
+                    "pos": [3,0]
                 }
             ]
         ]
@@ -231,36 +199,3 @@ class Test_Area:
         for floor in self.floors:
             mz.addFloor(modules = floor)
         assert mz.floors[0].modules[0].pos == self.floors[0][0]['pos']
-    
-    def test_design_dims(self):
-        mz = Mezzanine()
-        for floor in self.floors:
-            mz.addFloor(modules = floor)
-        dims = mz.dims
-        assert dims['length'][0] == 3
-        assert dims['width'][0] == 3.5
-        assert dims['height'][0] == 3
-        assert dims['joist_sep'][0] == 0.5
-    
-    def test_mezzanine_area_scheme_modules_1floor(self):
-        mz = Mezzanine()
-        mz.addFloor(modules = self.modulesInfo)
-        fig = mz.scheme(False)
-        ax = fig.axes[0]
-        numLines = 0
-        for child in ax.get_children():
-            if isinstance(child, lines.Line2D):
-                numLines += 1
-        assert numLines/2 == 18.0
-    
-    def test_mezzanine_area_sheme_modules(self):
-        mz = Mezzanine()
-        for floor in self.floors:
-            mz.addFloor(modules = floor)
-        fig = mz.scheme(False)
-        for ax in fig.axes:
-            numLines = 0
-            for child in ax.get_children():
-                if isinstance(child, lines.Line2D):
-                    numLines += 1
-            assert numLines/2 == 18.0
